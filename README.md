@@ -38,7 +38,7 @@ Add user to /etc/sudoers.d/grader
 $ ssh -i <.pem file> ubuntu@<public IP of your instance>
 ```
 
-### Generate SSH keys
+### Generate SSH keys and set security configurations
 Always *generate* keys locally.
 Create the pair. Save it to a directory and filename (default is `~/.ssh/id_rsa`, but you can change the filename to something more specific, e.g. `udacity_linux_course`). Private and public keys will be generated.
 ```
@@ -107,7 +107,7 @@ Install it.
 ```
 $ sudo apt-get install libapache2-mod-wsgi
 ```
-You then need to configure Apache to handle requests using the WSGI module. You’ll do this by editing the `/etc/apache2/sites-enabled/000-default.conf` file. This file tells Apache how to respond to requests, where to find the files for a particular site, etc.
+You then need to configure Apache to handle requests using the WSGI module.
 
 ### Make a wsgi app. 
 Make `.wsgi` file for your app.
@@ -180,10 +180,11 @@ item_catalog/
 ```
 
 ## Third-party resources used to complete this project
-[Disabling SSH login for root user](https://mediatemple.net/community/products/dv/204643810/how-do-i-disable-ssh-login-for-the-root-user)
-[How to set up a ufw firewall on Ubunug](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-18-04)
-[Postgresql: How to grant access to users](https://tableplus.io/blog/2018/04/postgresql-how-to-grant-access-to-users.html)
+- [Disabling SSH login for root user](https://mediatemple.net/community/products/dv/204643810/how-do-i-disable-ssh-login-for-the-root-user)
+- [How to set up a ufw firewall on Ubunug](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-18-04)
+- [Postgresql: How to grant access to users](https://tableplus.io/blog/2018/04/postgresql-how-to-grant-access-to-users.html)
+
 Special thanks to:
-[otsop110](https://github.com/otsop110/fullstack-nanodegree-linux-server-configuration#modify-your-app-structure-to-be-ready-for-the-deployment)
-[Sean-Holcomb](https://github.com/Sean-Holcomb/Linux-Server-Configuration)
-[sarithk](https://github.com/sarithk/LinuxServerConfig)
+- [otsop110](https://github.com/otsop110/fullstack-nanodegree-linux-server-configuration#modify-your-app-structure-to-be-ready-for-the-deployment)
+- [Sean-Holcomb](https://github.com/Sean-Holcomb/Linux-Server-Configuration)
+- [sarithk](https://github.com/sarithk/LinuxServerConfig)
