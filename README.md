@@ -1,10 +1,12 @@
 # Linux Server Configuration (final project)
 This repo contains the source files used to create and configure the web app deployed at www.memorepo.com.
+- IP address (public): `18.212.186.88`
+- URL: `http://memorepo.com/`
 
 ## Connecting to the site
 ```
 (SSH private key submitted with this project; assuming it's saved to local directory ~/.ssh/grader)
-$ ssh grader@18.212.186.88 -p 22 -i grader
+$ ssh grader@18.212.186.88 -p 22 -i <path to ~/.ssh/grader>
 ```
 
 ## Software installed
@@ -33,10 +35,15 @@ Add new user ("grader").
 ```
 $ sudo adduser grader
 ```
-Add user to /etc/sudoers.d/grader
+Then add new user to `/etc/sudoers.d/` directory. (Just copy the existing file for another sudoer, e.g. `vagrant`.)
 ```
-$ ssh -i <.pem file> ubuntu@<public IP of your instance>
+$ sudo cp /etc/sudoers.d/vagrant /etc/sudoers.d/grader
 ```
+Edit the new file with parameters for your new user.
+```
+$ sudo vim /etc/sudoers.d/grader
+```
+New user now has sudo permissions.
 
 ### Generate SSH keys and set security configurations
 Always *generate* keys locally.
@@ -44,8 +51,7 @@ Create the pair. Save it to a directory and filename (default is `~/.ssh/id_rsa`
 ```
 $ ssh-keygen
 ```
-Save the *public* key on your remote server.
-In the home directory of remote machine, make an `.ssh` dir.
+Save the *public* key on your remote server. In the home directory of remote machine, make an `.ssh` dir.
 ```
 $ mkdir .ssh
 ```
@@ -54,8 +60,7 @@ Make an `authorized_keys` file and save public key here. Each line in this file 
 $ touch .ssh/authorized_keys
 $ nano .ssh/authorized_keys
 ```
-Paste in your public key. (Use: `$ pbcopy < keyname.pub`)
-Set permissions on `authorized_keys` file and the `.ssh` directory.
+Paste in your public key (use: `$ pbcopy < keyname.pub`). Set permissions on `authorized_keys` file and the `.ssh` directory.
 ```
 $ chmod 700 .ssh
 $ chmod 644 .ssh/authorized_keys
@@ -64,8 +69,7 @@ You can now login like so, using the `-i` flag pointing to your private key file
 ```
 $ ssh <username>@127.0.0.1 -p 2222 -i ~/.ssh/<filename>
 ```
-Force key based authentication for all users.
-Edit the `/etc/ssh/sshd_config` file.
+Force key based authentication for all users. Edit the `/etc/ssh/sshd_config` file.
 ```
 $ sudo vim /etc/ssh/sshd_config
 Change “PasswordAuthentication” to “no”.
@@ -87,6 +91,7 @@ To this:
 ```
 PermitRootLogin no
 ```
+
 ### Apache web server
 Install apache2
 ```
@@ -102,17 +107,15 @@ For debugging, check error log:
 ```
 $ sudo vim /var/log/apache2/error.log
 ```
+
 ### Apache mod-wsgi (web server gateway interface)
 Install it.
 ```
 $ sudo apt-get install libapache2-mod-wsgi
 ```
-You then need to configure Apache to handle requests using the WSGI module.
-
-### Make a wsgi app. 
-Make `.wsgi` file for your app.
+You then need to configure Apache to handle requests using the WSGI module. Make a `.wsgi` file for your app.
 ```
-$ sudo nano /var/www/html/item_catalog.wsgi
+$ sudo vim /var/www/html/item_catalog.wsgi
 ```
 Create and edit your config file:
 ```
@@ -185,6 +188,6 @@ item_catalog/
 - [Postgresql: How to grant access to users](https://tableplus.io/blog/2018/04/postgresql-how-to-grant-access-to-users.html)
 
 Special thanks to:
-- [otsop110](https://github.com/otsop110/fullstack-nanodegree-linux-server-configuration#modify-your-app-structure-to-be-ready-for-the-deployment)
+- [otsop110](https://github.com/otsop110/fullstack-degree-linux-server-configuration#modify-your-app-structure-to-be-ready-for-the-deployment)
 - [Sean-Holcomb](https://github.com/Sean-Holcomb/Linux-Server-Configuration)
 - [sarithk](https://github.com/sarithk/LinuxServerConfig)
