@@ -32,20 +32,15 @@ $ sudo apt-get autoremove
 Add new user ("grader").
 ```
 $ sudo adduser grader
+```
 Add user to /etc/sudoers.d/grader
 ```
 $ ssh -i <.pem file> ubuntu@<public IP of your instance>
-SU into the new user:
-$ su <username>
-Enter password; then enter new password.
-Jump down to “For a new user name, you’ll need to do these steps” in next section.
-SSH in as user.
-$ ssh <username>@127.0.0.1 -i <path to specific private key>
-Key Based Authentication
+```
 
 ### Generate SSH keys
 Always *generate* keys locally.
-Create the pair. Save it to a directory and filename (default is ~/.ssh/id_rsa, but you can change the filename to something more specific, e.g. “udacity_linux_course”). Private and public keys will be generated.
+Create the pair. Save it to a directory and filename (default is `~/.ssh/id_rsa`, but you can change the filename to something more specific, e.g. `udacity_linux_course`). Private and public keys will be generated.
 ```
 $ ssh-keygen
 ```
@@ -102,6 +97,7 @@ Start it.
 $ sudo service apache2 start
 ```
 Test that the server is working by opening your browser and going to the public IP address of your instance. You should see the default ubuntu apache page saying “It works!”.
+
 For debugging, check error log:
 ```
 $ sudo vim /var/log/apache2/error.log
@@ -113,22 +109,38 @@ $ sudo apt-get install libapache2-mod-wsgi
 ```
 You then need to configure Apache to handle requests using the WSGI module. You’ll do this by editing the `/etc/apache2/sites-enabled/000-default.conf` file. This file tells Apache how to respond to requests, where to find the files for a particular site, etc.
 
-### Make a test wsgi app. 
-Edit your config file:
+### Make a wsgi app. 
+Make `.wsgi` file for your app.
 ```
-$ sudo vim /etc/apache2/sites-enabled/000-default.conf
+$ sudo nano /var/www/html/item_catalog.wsgi
 ```
-Add the following line at the end of the `<VirtualHost *:80>` block, right before the closing `</VirtualHost>` line: 
+Create and edit your config file:
 ```
-WSGIScriptAlias / /var/www/html/myapp.wsgi
+$ sudo vim /etc/apache2/sites-available/item_catalog.conf
+```
+Edit it like so:
+```
+<VirtualHost *:80>
+                ServerName 18.212.186.88
+                ServerAdmin admin@18.212.186.88@
+                WSGIScriptAlias / /var/www/udacity_fsnd/item_catalog/item_catalog.wsgi
+                <Directory /var/www/udacity_fsnd/item_catalog/item_catalog/>
+                        Order allow,deny
+                        Allow from all
+                </Directory>
+                Alias /static /var/www/udacity_fsnd/item_catalog/item_catalog/static
+                <Directory /var/www/udacity_fsnd/item_catalog/item_catalog/static/>
+                        Order allow,deny
+                        Allow from all
+                </Directory>
+                ErrorLog ${APACHE_LOG_DIR}/error.log
+                LogLevel warn
+                CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
 ```
 Finally, restart Apache with this command:
 ```
 $ sudo apache2ctl restart
-```
-Make `.wsgi` file for your app.
-```
-$ sudo nano /var/www/html/item_catalog.wsgi
 ```
 
 ## Postgres
