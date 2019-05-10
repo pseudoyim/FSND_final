@@ -1,4 +1,4 @@
-# item_catalog_final
+# Linux Server Configuration (final project)
 This repo contains the source files used to create and configure the web app deployed at www.memorepo.com.
 
 ## Connecting to the site
