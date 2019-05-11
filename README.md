@@ -1,12 +1,12 @@
 # Linux Server Configuration (final project)
 This repo contains the source files used to create and configure the web app deployed at www.memorepo.com.
-- IP address (public): `18.212.186.88`
+- IP address (public): `54.174.165.147`
 - URL: `http://memorepo.com/`
 
 ## Connecting to the site
 ```
 (SSH private key submitted with this project; assuming it's saved to local directory ~/.ssh/grader)
-$ ssh grader@18.212.186.88 -p 22 -i <path to ~/.ssh/grader>
+$ ssh grader@54.174.165.147 -p 2200 -i <path to ~/.ssh/grader>
 ```
 
 ## Software installed
@@ -124,8 +124,8 @@ $ sudo vim /etc/apache2/sites-available/item_catalog.conf
 Edit it like so:
 ```
 <VirtualHost *:80>
-                ServerName 18.212.186.88
-                ServerAdmin admin@18.212.186.88@
+                ServerName 54.174.165.147
+                ServerAdmin admin@54.174.165.147
                 WSGIScriptAlias / /var/www/udacity_fsnd/item_catalog/item_catalog.wsgi
                 <Directory /var/www/udacity_fsnd/item_catalog/item_catalog/>
                         Order allow,deny
@@ -177,9 +177,9 @@ $ sudo vim/var/log/apache2/error.log
 The `item_catalog.wsgi` file should be saved one level up, in the same directory as `item_catalog`.
 ```
 item_catalog/
-|__item_catalog.wsgi
-|__item_catalog/
-    |__(rest of this repo's contents)
+|--item_catalog.wsgi
+|--item_catalog/
+    |--(rest of this repo's contents)
 ```
 
 ## Third-party resources used to complete this project
@@ -188,6 +188,6 @@ item_catalog/
 - [Postgresql: How to grant access to users](https://tableplus.io/blog/2018/04/postgresql-how-to-grant-access-to-users.html)
 
 Special thanks to:
-- [otsop110](https://github.com/otsop110/fullstack-degree-linux-server-configuration#modify-your-app-structure-to-be-ready-for-the-deployment)
+- [otsop110](https://github.com/otsop110/fullstack-nanodegree-linux-server-configuration)
 - [Sean-Holcomb](https://github.com/Sean-Holcomb/Linux-Server-Configuration)
 - [sarithk](https://github.com/sarithk/LinuxServerConfig)
