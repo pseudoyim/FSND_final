@@ -1,12 +1,12 @@
 # Linux Server Configuration (final project)
 This repo contains the source files used to create and configure the web app deployed at www.memorepo.com.
-- IP address (public): `54.174.165.147`
+- IP address (public): `18.212.186.88`
 - URL: `http://memorepo.com/`
 
 ## Connecting to the site
 ```
 (SSH private key submitted with this project; assuming it's saved to local directory ~/.ssh/grader)
-$ ssh grader@54.174.165.147 -p 2200 -i <path to ~/.ssh/grader>
+$ ssh grader@18.212.186.88 -p 2200 -i <path to ~/.ssh/grader>
 ```
 
 ## Software installed
@@ -67,7 +67,7 @@ $ chmod 644 .ssh/authorized_keys
 ```
 You can now login like so, using the `-i` flag pointing to your private key file.
 ```
-$ ssh <username>@127.0.0.1 -p 2222 -i ~/.ssh/<filename>
+$ ssh grader@18.212.186.88 -p 2200 -i ~/.ssh/<filename>
 ```
 Force key based authentication for all users. Edit the `/etc/ssh/sshd_config` file.
 ```
@@ -124,8 +124,8 @@ $ sudo vim /etc/apache2/sites-available/item_catalog.conf
 Edit it like so:
 ```
 <VirtualHost *:80>
-                ServerName 54.174.165.147
-                ServerAdmin admin@54.174.165.147
+                ServerName 18.212.186.88
+                ServerAdmin admin@18.212.186.88
                 WSGIScriptAlias / /var/www/udacity_fsnd/item_catalog/item_catalog.wsgi
                 <Directory /var/www/udacity_fsnd/item_catalog/item_catalog/>
                         Order allow,deny
